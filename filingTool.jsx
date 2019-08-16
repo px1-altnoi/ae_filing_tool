@@ -1,3 +1,4 @@
+
 app.beginUndoGroup("filing tool");
 
 // 1. Global variables ------------------------------------
@@ -34,15 +35,15 @@ function mvFile(layer){
     var mflg = 0;
     for(var k = 0;k < FTGlen - 1;k++){
         if(doneFTG[k] == layer.source.id){
-            layer.source.parentFolder = mFolder;
-            mflg = 1;
-            break;
+            if(pFolder.id != layer.source.parentFolder.id){
+                layer.source.parentFolder = mFolder;
+                mflg = 1;
+                break;
+            }
         }else{
             // do nothing
         }
-
     }
-
     if(mflg == 0) {
         if(layer.source.mainSource instanceof FileSource || layer.source.mainSource instanceof SolidSource){
             layer.source.parentFolder = pFolder;
@@ -60,7 +61,7 @@ function digCMP(composition){
         if(isAVLayer(composition.layers[i])){
             if(isPRECMP(composition.layers[i])){
                 var flg = 0;
-                for(var j = 0;j < CMPlen;j++){
+                for(var j = 0;j < CMPlen - 1;j++){
                     if(doneCMP[j] == composition.layers[i].source.id){
                         flg = 1;
                         break;
