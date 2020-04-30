@@ -36,6 +36,10 @@ function mvFile(layer){
     for(var k = 0;k < FTGlen - 1;k++){
         if(doneFTG[k] == layer.source.id){
             if(pFolder.id != layer.source.parentFolder.id){
+                
+                // note: 上記条件のうち、同一コンポに適応しようとしているものがないかチェック
+                // (v1.1で確認されている バグフィックス用領域です。)
+                
                 layer.source.parentFolder = mFolder;
                 mflg = 1;
                 break;
@@ -82,7 +86,7 @@ function mkDir(dirName){
 }
 
 function cleanUp(){
-
+    
 }
 
 // 3. Main ------------------------------------------------
